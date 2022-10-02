@@ -2,8 +2,8 @@ package com.iesb.apibiblioteca.controller.user;
 
 import com.iesb.apibiblioteca.dto.user.UserDTO;
 import com.iesb.apibiblioteca.dto.user.UserDTOResponse;
-import com.iesb.apibiblioteca.service.UserService;
-import com.iesb.apibiblioteca.service.implementations.CustomUserServiceImpl;
+import com.iesb.apibiblioteca.service.security.UserService;
+import com.iesb.apibiblioteca.service.implementations.securityImpl.CustomUserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

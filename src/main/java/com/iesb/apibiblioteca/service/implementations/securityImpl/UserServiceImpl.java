@@ -1,4 +1,4 @@
-package com.iesb.apibiblioteca.service.implementations;
+package com.iesb.apibiblioteca.service.implementations.securityImpl;
 
 import com.iesb.apibiblioteca.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

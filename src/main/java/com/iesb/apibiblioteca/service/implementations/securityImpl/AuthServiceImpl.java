@@ -1,10 +1,10 @@
-package com.iesb.apibiblioteca.service.implementations;
+package com.iesb.apibiblioteca.service.implementations.securityImpl;
 
 import com.iesb.apibiblioteca.jwt.JwtImpl;
 import com.iesb.apibiblioteca.model.security.User;
 import com.iesb.apibiblioteca.payload.request.auth.SignInRequest;
 import com.iesb.apibiblioteca.payload.response.auth.JwtAuthResponse;
-import com.iesb.apibiblioteca.service.AuthService;
+import com.iesb.apibiblioteca.service.security.AuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

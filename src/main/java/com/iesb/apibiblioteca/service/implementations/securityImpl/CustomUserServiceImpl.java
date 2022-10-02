@@ -1,13 +1,13 @@
-package com.iesb.apibiblioteca.service.implementations;
+package com.iesb.apibiblioteca.service.implementations.securityImpl;
 
 import com.iesb.apibiblioteca.dto.user.UserDTO;
 import com.iesb.apibiblioteca.dto.user.UserDTOResponse;
+import com.iesb.apibiblioteca.exception.AlreadyExistsException;
 import com.iesb.apibiblioteca.model.security.Role;
 import com.iesb.apibiblioteca.model.security.User;
 import com.iesb.apibiblioteca.repository.RoleRepository;
 import com.iesb.apibiblioteca.repository.UserRepository;
-import com.iesb.apibiblioteca.service.UserService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.iesb.apibiblioteca.service.security.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,22 +29,19 @@ public class CustomUserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTOResponse save(UserDTO userDTO) {
+    public UserDTOResponse save(UserDTO userDTO) throws AlreadyExistsException {
         User u = new User();
-        Optional<Role> role = roleRepo.findById(1L);
-        Set<Role> roles = new HashSet<>();
 
-        if(role.isPresent()) {
-            Role r = new Role();
-            r.setName(role.get().getName());
-            r.setId(role.get().getId());
-            roles.add(r);
-            u.setRoles(roles);
+        if(userRepo.findByUsername(userDTO.getUsername()).isPresent()) {
+            throw new AlreadyExistsException("User with Username: " + "'" + userDTO.getUsername() + "'" + " Already Exists");
+        } else if(userRepo.findByEmail(userDTO.getEmail()).isPresent()) {
+            throw new AlreadyExistsException("User with Email: " + "'" + userDTO.getEmail() + "'" + " Already Exists");
         }
 
         u.setEmail(userDTO.getEmail());
-        u.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         u.setUsername(userDTO.getUsername());
+        u.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        u.setRoles(setDefaultRole());
         userRepo.save(u);
 
         UserDTOResponse uDTO = new UserDTOResponse();
@@ -53,5 +50,18 @@ public class CustomUserServiceImpl implements UserService {
         uDTO.setId(u.getId());
 
         return uDTO;
+    }
+
+    public Set<Role> setDefaultRole() {
+        Optional<Role> role = roleRepo.findById(1L);
+        Set<Role> roles = new HashSet<>();
+
+        if(role.isPresent()) {
+            Role r = new Role();
+            r.setName(role.get().getName());
+            r.setId(role.get().getId());
+            roles.add(r);
+        }
+        return roles;
     }
 }

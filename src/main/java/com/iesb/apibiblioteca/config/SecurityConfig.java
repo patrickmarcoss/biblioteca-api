@@ -2,10 +2,9 @@ package com.iesb.apibiblioteca.config;
 
 import com.iesb.apibiblioteca.jwt.JwtAuthFilter;
 import com.iesb.apibiblioteca.jwt.JwtImpl;
-import com.iesb.apibiblioteca.service.implementations.UserServiceImpl;
+import com.iesb.apibiblioteca.service.implementations.securityImpl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

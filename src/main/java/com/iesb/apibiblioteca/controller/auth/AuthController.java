@@ -2,7 +2,7 @@ package com.iesb.apibiblioteca.controller.auth;
 
 import com.iesb.apibiblioteca.payload.request.auth.SignInRequest;
 import com.iesb.apibiblioteca.payload.response.auth.JwtAuthResponse;
-import com.iesb.apibiblioteca.service.AuthService;
+import com.iesb.apibiblioteca.service.security.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
