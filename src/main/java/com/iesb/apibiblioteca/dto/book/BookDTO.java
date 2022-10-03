@@ -29,7 +29,7 @@ public class BookDTO implements Serializable {
         language = book.getLanguage();
         author = book.getAuthor();
         publishingCompany = book.getPublishingCompany();
-        user = buildUserDTO(book.getUser());
+        user = book.getUser() != null ? buildUserDTO(book.getUser()) : null;
     }
 
     private UserDTO buildUserDTO(User user) {
